@@ -10,4 +10,4 @@ if (!requireNamespace("devtools")) install.packages("devtools")
 devtools::install_github("psyflo/hcibaselreport")
 ```
 
-3. Select `File -> New File -> R Markdown...` then switch to the "From Template" tab and select `HCI Basel Seminar Report`.
+3. Select `File -> New File -> R Markdown...` then switch to the `From Template` tab and select `HCI Basel Seminar Report`.
