@@ -1,57 +1,94 @@
 ---
-title: "Report Title"
+title: "Your Report Title"
 author: "Your Name"
-date: "The Date"
-keywords: "author, keywords"
-output: 
-  word_document:
-    reference_docx: template.docx
+date: "Date"
+keywords: "my, author, keywords"
+output:
+  html_document:
+    toc: true
+    toc_float: true
 bibliography: mybib.bib
+link-citations: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-library(flextable) # create nicer tables in Word. Learn how: https://ardata-fr.github.io/flextable-book/index.html
+library(kableExtra) # nicer HTML tables
 library(tidyverse) # the power of the pipe %>% 
 library(psych) # includes useful methods such as exploratory factor analysis
 library(GPArotation) # needed for psych
-library(lavaan) # the package for CFA / SEM
+library(lavaan) # THE package for CFA / SEM
 ```
+<!-- Keep this to help us check your word count-->
+Word count: `r as.integer(sub("(\\d+).+$", "\\1", system(sprintf("wc -w %s", knitr::current_input()), intern = TRUE))) - 20`
+<!-- End keep this -->
 
 # Abstract
+Verständliche Zusammenfassung der wichtigsten Punkte (Problem, Methode, Resultate, Implikationen)
+
+Author keywords: *`r rmarkdown::metadata$keywords`*
 
 # Introduction
-In [@Stodden2014], authors mentioned Word tables as one of the
-obstacles to effective collaboration.
+Problemstellung klar, zentrale Konzepte definiert
+
+Zitationen lassen sich im Biblatex-Format einfügen (siehe Datei mybib.bib): 
+In @Stodden2014, authors mentioned Word tables as one of the obstacles to effective collaboration.
 
 # Method
+Methodisches Vorgehen nachvollziehbar und begründet
+Auswahl der Messinstrumente ist begründet
+Stichprobe ist vollständig beschrieben (Source, N, Age, Gender, Data cleaning) 
 
 ## Measures
 
-```{r overview-doc-prep, tab.cap="Overview of questionnaire", fig.width = 6}
+Tabellen lassen sich z.B. mit dem Package `kableExtra` sehr flexibel gestalten. 
+```{r overview-doc-prep, results='asis'}
 df.items <- data.frame(number = 1:9,item = row.names(Thurstone.33))
-ft <- flextable(df.items)
-ft <- add_footer_lines(ft, "Items and wordings used in this study.")
-ft
+kbl(df.items, caption = "Overview of questionnaire") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
 
 
 ## Procedure
+
 ## Participants
 
 # Results
 
-```{r fa-pattern-matrix, tab.cap="Loadings of items on factors"}
+Resultate mit allen statistischen Kennwerten korrekt berichtet
+Deskriptive Statistiken (M, SD) für zentrale Variablen
+Adequate Verwendung von Tabellen und Grafiken zur Verdeutlichung zentraler Ergebnisse
+
+
+```{r fa-pattern-matrix}
 fa.out <- fa(Thurstone.33,2)
 df <- data.frame(unclass(fa.out$loadings), h2=fa.out$communalities, u2= fa.out$uniqueness,com=fa.out$complexity)
-flextable(round(df,2))
+
+
+df %>% 
+  mutate(across(where(is.numeric), round, 3)) %>% 
+  kbl(caption = "Pattern matrix of the EFA for questionnaire 1") %>%
+  kable_styling()
 ```
 
 
 
 # Discussion
+Interpretation und Diskussion nachvollziehbar
+Mindestens eine mögliche Einschränkung (Limitation) wird diskutiert (abgesehen von kleinem N) 
+
+Bonus:
+Bezug zu diskutierten Aspekten aus dem gesamten Seminar und/oder zu weiterführender Literatur
+
 ## Limitations
 ## Conclusion
 
 # References
+
+<div id="refs"></div>
+
+\newpage
+# Appendix
+
+Report all items used here and any additional *relevant* tables or figures.
