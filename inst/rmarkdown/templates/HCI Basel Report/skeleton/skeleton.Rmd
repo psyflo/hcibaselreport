@@ -1,0 +1,57 @@
+---
+title: "Report Title"
+author: "Your Name"
+date: "The Date"
+keywords: "author, keywords"
+output: 
+  word_document:
+    reference_docx: template.docx
+bibliography: mybib.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(flextable) # create nicer tables in Word. Learn how: https://ardata-fr.github.io/flextable-book/index.html
+library(tidyverse) # the power of the pipe %>% 
+library(psych) # includes useful methods such as exploratory factor analysis
+library(GPArotation) # needed for psych
+library(lavaan) # the package for CFA / SEM
+```
+
+# Abstract
+
+# Introduction
+In [@Stodden2014], authors mentioned Word tables as one of the
+obstacles to effective collaboration.
+
+# Method
+
+## Measures
+
+```{r overview-doc-prep, tab.cap="Overview of questionnaire", fig.width = 6}
+df.items <- data.frame(number = 1:9,item = row.names(Thurstone.33))
+ft <- flextable(df.items)
+ft <- add_footer_lines(ft, "Items and wordings used in this study.")
+ft
+```
+
+
+
+## Procedure
+## Participants
+
+# Results
+
+```{r fa-pattern-matrix, tab.cap="Loadings of items on factors"}
+fa.out <- fa(Thurstone.33,2)
+df <- data.frame(unclass(fa.out$loadings), h2=fa.out$communalities, u2= fa.out$uniqueness,com=fa.out$complexity)
+flextable(round(df,2))
+```
+
+
+
+# Discussion
+## Limitations
+## Conclusion
+
+# References
