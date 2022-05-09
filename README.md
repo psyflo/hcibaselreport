@@ -3,7 +3,7 @@
 ## How to install this package
 
 1. Open R Studio
-2. Paste the code below into the console
+2. Paste the code below into the console & press Enter
 
 ```r
 if (!requireNamespace("devtools")) install.packages("devtools")
