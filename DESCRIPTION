@@ -1,11 +1,11 @@
 Package: hcibaselreport
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Adds HCI Basel Report as a Markdown Template for R 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Florian Brühlmann
+Maintainer: Florian Brühlmann <florian@bruehlmann.io>
+Description: Very simple package used to add a Markdown template to R.
+    This RMarkdown template is used for the final report of the seminar "Online Forschung in der MMI: Fragebogenkonstruktion und -analyse".
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
