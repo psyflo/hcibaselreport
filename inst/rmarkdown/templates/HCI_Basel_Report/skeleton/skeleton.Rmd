@@ -22,7 +22,16 @@ library(semPlot) # plot CFA models
 # add any additional packages you may need here
 ```
 <!-- Keep this to help us check your word count-->
-Word count: `r as.integer(sub("(\\d+).+$", "\\1", system(sprintf("wc -w %s", knitr::current_input()), intern = TRUE))) - 20`
+```{r Word Count, include=FALSE}
+
+#using addin from https://github.com/benmarwick/wordcountaddin
+devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)
+
+#wordcountaddin::word_count()
+
+```
+
+Word count: `r wordcountaddin::word_count()`
 <!-- End keep this -->
 
 # Abstract
